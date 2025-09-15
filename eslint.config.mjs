@@ -1,14 +1,13 @@
-import { FlatCompat } from '@eslint/eslintrc'
- 
+import { FlatCompat } from '@eslint/eslintrc';
+
 const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-})
- 
+  baseDirectory: import.meta.dirname, // Node.js >= 20.11
+});
+
 const eslintConfig = [
   ...compat.config({
     extends: ['next'],
-    plugins: ['import'],
+    plugins: ['import', '@typescript-eslint'], // add @typescript-eslint here
   }),
   {
     rules: {
@@ -28,6 +27,6 @@ const eslintConfig = [
       'import/no-useless-path-segments': 'error',
     },
   },
-]
- 
-export default eslintConfig
+];
+
+export default eslintConfig;
