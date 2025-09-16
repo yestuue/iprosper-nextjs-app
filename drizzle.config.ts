@@ -1,14 +1,12 @@
-import { defineConfig } from 'drizzle-kit';
-import type { Config } from 'drizzle-kit';
+// drizzle.config.ts
 
-const dbConfig: Config = defineConfig({
-  schema: './src/db/schema.ts',
-  out: './drizzle',
-  dialect: 'turso',
+const config = {
+  schema: "./src/lib/schema.ts",   // adjust path to your schema
+  out: "./drizzle",
+  driver: "better-sqlite",         // v0.18.1 uses driver
   dbCredentials: {
-    url: process.env.TURSO_CONNECTION_URL!,
-    authToken: process.env.TURSO_AUTH_TOKEN!,
+    url: "./sqlite.db"
   },
-});
+};
 
-export default dbConfig;
+export default config;
