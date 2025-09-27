@@ -45,6 +45,19 @@ const RealTimeVoiceAgents = () => {
               className="object-cover"
             />
           </div>
+
+           {/* === Added iframe widget === */}
+  <div className="absolute inset-0 flex items-center justify-center z-20">
+    <iframe
+      id="audio_iframe"
+      src="https://voiceagents.tech//widget/v2/8b28518f-ba4f-4083-b282-8dbd0a00c7ab/1758814938820x190350333809891300"
+      allow="microphone"
+      width="400"
+      height="550"
+      scrolling="no"
+      style={{ background: "transparent", border: "none" }}
+    ></iframe>
+  </div>
           
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <button
