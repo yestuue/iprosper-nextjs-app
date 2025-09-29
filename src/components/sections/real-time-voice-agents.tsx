@@ -1,17 +1,16 @@
 "use client";
 
-import { Play, Pause } from "lucide-react";
 import { useState } from "react";
 
 const RealTimeVoiceAgents = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handlePlayClick = () => {
+  const handleStartCall = () => {
     setIsPlaying(!isPlaying);
   };
 
   return (
-    <section className="bg-[#1a1a1a] text-white py-[120px] px-6 overflow-hidden">
+    <section className="bg-[#1a1a1a] text-white py-[120px] px-6 relative" style={{ overflow: 'hidden', isolation: 'isolate' }}>
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-12 sm:gap-16">
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto">
@@ -25,77 +24,14 @@ const RealTimeVoiceAgents = () => {
         </div>
 
         {/* Animated Siri Widget */}
-        <div className="relative w-full max-w-2xl flex items-center justify-center">
+        <div className="relative w-full max-w-2xl flex flex-col items-center justify-center gap-6">
           <div className="siri-container relative flex items-center justify-center">
-            {/* Glow Effect */}
-            <div 
-              className={`absolute w-[400px] h-[400px] rounded-full pointer-events-none transition-opacity duration-500 ${
-                isPlaying ? 'opacity-70' : 'opacity-30'
-              }`}
-              style={{
-                background: `radial-gradient(
-                  circle at center,
-                  transparent 30%,
-                  rgba(0, 245, 255, 0.1) 40%,
-                  rgba(160, 32, 240, 0.1) 60%,
-                  rgba(255, 20, 147, 0.1) 80%,
-                  transparent 100%
-                )`,
-                animation: isPlaying ? 'glowPulse 6s ease-in-out infinite' : 'glowPulse 6s ease-in-out infinite paused'
-              }}
-            />
-            
-            {/* Floating Particles */}
-            <div className="floating-particles absolute w-[600px] h-[600px] pointer-events-none">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className={`particle absolute w-[3px] h-[3px] rounded-full transition-opacity duration-500 ${
-                    isPlaying ? 'opacity-100' : 'opacity-40'
-                  }`}
-                  style={{
-                    background: 'linear-gradient(45deg, #00f5ff, #a020f0)',
-                    top: `${[10, 30, 70, 35, 50, 70][i]}%`,
-                    left: i % 2 === 0 ? `${[20, 25, 25][Math.floor(i/2)]}%` : 'auto',
-                    right: i % 2 === 1 ? `${[15, 20, 10][Math.floor(i/2)]}%` : 'auto',
-                    animationDelay: `${i}s`,
-                    animationDuration: `${6 + i}s`,
-                    animation: isPlaying ? `float ${6 + i}s ease-in-out infinite` : `float ${6 + i}s ease-in-out infinite paused`
-                  }}
-                />
-              ))}
-            </div>
-            
-            {/* Outer Rings */}
-            <div className="outer-rings absolute w-full h-full pointer-events-none">
-              {[
-                { size: 320, color: 'rgba(0, 245, 255, 0.6)', delay: 0 },
-                { size: 380, color: 'rgba(160, 32, 240, 0.5)', delay: 1 },
-                { size: 440, color: 'rgba(255, 20, 147, 0.4)', delay: 2 }
-              ].map((ring, i) => (
-                <div
-                  key={i}
-                  className={`ring absolute rounded-full border top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 ${
-                    isPlaying ? '' : 'animation-play-state-paused'
-                  }`}
-                  style={{
-                    width: `${ring.size}px`,
-                    height: `${ring.size}px`,
-                    borderColor: ring.color,
-                    borderWidth: '1px',
-                    animation: isPlaying ? `pulseRingOrganic 4s ease-in-out infinite` : `pulseRingOrganic 4s ease-in-out infinite paused`,
-                    animationDelay: `${ring.delay}s`
-                  }}
-                />
-              ))}
-            </div>
             
             {/* Main Siri Circle */}
             <div 
-              className={`siri-circle relative w-[280px] h-[280px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-500 ${
+              className={`siri-circle relative w-[280px] h-[280px] rounded-full flex items-center justify-center transition-all duration-500 ${
                 isPlaying ? '' : 'animation-play-state-paused'
               }`}
-              onClick={handlePlayClick}
               style={{
                 animation: isPlaying ? 'breathe 4s ease-in-out infinite' : 'breathe 4s ease-in-out infinite paused'
               }}
@@ -164,23 +100,28 @@ const RealTimeVoiceAgents = () => {
                     animation: isPlaying ? 'textGlow 3s ease-in-out infinite alternate' : 'textGlow 3s ease-in-out infinite alternate paused'
                   }}
                 >
-                  Hi, What's up
+                  Hi, There
                 </div>
-                
-                {/* Play/Pause Button Overlay */}
-                <button
-                  onClick={handlePlayClick}
-                  className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/30 rounded-full backdrop-blur-sm"
-                >
-                  {isPlaying ? (
-                    <Pause className="h-12 w-12 fill-white text-white" />
-                  ) : (
-                    <Play className="h-12 w-12 fill-white text-white ml-1" />
-                  )}
-                </button>
               </div>
             </div>
           </div>
+
+          {/* Widget Label */}
+          <div className="text-center mt-8">
+            <p className="text-lg text-[#a0a0a0] font-medium">My Assistant Widget</p>
+          </div>
+
+          {/* Start a Call Button */}
+          <button
+            onClick={handleStartCall}
+            className={`px-8 py-3 rounded-full font-medium text-base transition-all duration-300 ${
+              isPlaying
+                ? 'bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/50'
+                : 'bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-400 hover:via-purple-400 hover:to-pink-400 text-white shadow-lg shadow-purple-500/50'
+            }`}
+          >
+            {isPlaying ? 'End Call' : 'Start a Call'}
+          </button>
         </div>
 
         {/* Feature text grid */}
