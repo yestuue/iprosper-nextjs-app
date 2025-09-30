@@ -49,13 +49,6 @@ const footerLinkColumns: LinkColumn[] = [
   },
 ];
 
-const socialLinks: NavLink[] = [
-  { name: "X/T", href: "https://x.com/cartesiai" },
-  { name: "Dis", href: "https://discord.gg/cartesia" },
-  { name: "LinI", href: "https://www.linkedin.com/company/cartesia-ai/" },
-  { name: "GitH", href: "https://github.com/cartesia-ai" },
-];
-
 const legalLinks: NavLink[] = [
   { name: "Terms of Use", href: "#" },
   { name: "Privacy", href: "#" },
@@ -186,19 +179,6 @@ export default function Footer() {
               <p className="mt-4 text-base text-text-secondary leading-normal">
                 Real-time, multimodal intelligence for every device.
               </p>
-              <div className="mt-6 flex items-center gap-4">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-text-secondary hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                ))}
-              </div>
             </div>
 
             {footerLinkColumns.map((column) => (
